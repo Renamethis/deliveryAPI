@@ -3,9 +3,7 @@ from flask import jsonify, abort
 from . import create_app
 from .tasks import get, app
 
-#app = create_app(os.getenv('FLASK_CONFIG') or 'default')
-
-# Flask endpoints
+# Flask endpoints to read information from database 
 @app.route("/entries", methods=["GET"])
 def get_entries():
     task = get.delay(None)

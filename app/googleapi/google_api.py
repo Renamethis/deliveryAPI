@@ -14,4 +14,8 @@ class GoogleAPI:
     def update(self):
         sheet = self.__file.open("data")
         all_cells = sheet.values_get(range='A1:inf')['values']
+        for cell in all_cells[1:]:
+            cell[0] = int(cell[0])
+            cell[1] = int(cell[1])
+            cell[2] = float(cell[2])
         return pd.DataFrame(all_cells[1:], columns=all_cells[0])

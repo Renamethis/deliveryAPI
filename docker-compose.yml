@@ -13,9 +13,19 @@ services:
     environment:
       - FLASK_APP=server.py
       - DEV_DATABASE_URL=postgresql://root:secret@localhost:5432/delivery
-  celery:
+  beat:
     build: .
-    container_name: 'celery'
+    container_name: 'celery-beat'
+    command: celery -A app.celery beat -s ./celerybeat-schedule  
+    network_mode: "service:db"
+    depends_on:
+      - redis
+    environment:
+      - FLASK_APP=server.py
+      - DEV_DATABASE_URL=postgresql://root:secret@localhost:5432/delivery
+  worker:
+    build: .
+    container_name: 'celery-worker'
     command: celery -A app.celery worker --loglevel=info
     network_mode: "service:db"
     depends_on:

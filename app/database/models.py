@@ -4,8 +4,8 @@ from app import db
 class Entry(db.Model):
     __tablename__ = 'delivery'
     query = db.session.query_property()
-    id = db.Column(db.String(40), primary_key=True)
-    num = db.Column(db.Float, nullable=False, unique=False)
+    id = db.Column(db.Integer, primary_key=True)
+    num = db.Column(db.Integer, nullable=False, unique=False)
     pdate = db.Column(db.Date, nullable=False, unique=False)
     priced = db.Column(db.Float, nullable=False, unique=False)
     pricer = db.Column(db.Float, nullable=False, unique=False)
