@@ -5,7 +5,6 @@ FROM python:3.10.5
 RUN pip install -U pip 
 
 # Устанавливаем библиотеки
-RUN rm-rf /code/
 RUN pip install pipenv
 ADD . .
 RUN pipenv install --system --deploy --ignore-pipfile

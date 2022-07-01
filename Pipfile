@@ -8,6 +8,13 @@ oauth2client = "*"
 pyopenssl = "*"
 gspread = "*"
 pandas = "*"
+flask = "*"
+flask-sqlalchemy = "*"
+celery = "*"
+redis = "*"
+psycopg2-binary = "*"
+jsonify = "*"
+xmltodict = "*"
 
 [dev-packages]
 

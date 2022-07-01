@@ -5,20 +5,42 @@ services:
     depends_on:
       - db
     network_mode: "service:db"
-    image: python:3.10.5
     container_name: python
     restart: unless-stopped
     stdin_open: true
     build: .
-    command: python3 google_api.py
+    command: flask run --host=0.0.0.0
+    environment:
+      - FLASK_APP=server.py
+      - DEV_DATABASE_URL=postgresql://root:secret@localhost:5432/delivery
+  celery:
+    build: .
+    container_name: 'celery'
+    command: celery -A app.celery worker --loglevel=info
+    network_mode: "service:db"
+    depends_on:
+      - redis
+    environment:
+      - FLASK_APP=server.py
+      - DEV_DATABASE_URL=postgresql://root:secret@localhost:5432/delivery
   db:
-    image: postgres:13.3
+    container_name: db
+    build:
+      context: ./app/database
+      dockerfile: ./db.Dockerfile
     environment:
       POSTGRES_DB: "delivery"
       POSTGRES_USER: "root"
-      POSTGRES_PASSWORD: "123456"
+      POSTGRES_PASSWORD: "secret"
     ports:
       - "5432:5432"
-volumes:
-  my-db:
-    driver: local
+      - "5000:5000"
+  redis:
+    image: redis
+    restart: always
+    container_name: 'redis'
+    command: redis-server
+    ports:
+      - 6379:6379
+    links:
+      - db

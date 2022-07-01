@@ -1,1 +1,0 @@
-RUN chown -R root:root /docker-entrypoint-initdb.d/
