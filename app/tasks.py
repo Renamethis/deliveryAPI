@@ -107,3 +107,9 @@ def get(id):
             entry = entry.to_json()
             entry['date'] = entry['date'].strftime("%Y-%m-%d")
             return entry
+        
+@celery.task()
+def chart():
+    dates = [entry.pdate.strftime("%d/%m/%Y") for entry in Entry.query.order_by(Entry.pdate).all()]
+    prices = [entry.priced for entry in Entry.query.order_by(Entry.pdate).all()]
+    return dates, prices
