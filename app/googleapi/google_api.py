@@ -8,7 +8,9 @@ class GoogleAPI:
         'https://www.googleapis.com/auth/drive'
     ]
     def __init__(self):
-        credentials = ServiceAccountCredentials.from_json_keyfile_name("app/googleapi/credentials.json", self.__scopes)
+        credentials = ServiceAccountCredentials. \
+            from_json_keyfile_name("app/googleapi/credentials.json", 
+                                   self.__scopes)
         self.__file = gspread.authorize(credentials) 
 
     def update(self):

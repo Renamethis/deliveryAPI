@@ -4,5 +4,6 @@ CREATE TABLE IF NOT EXISTS delivery(
     num int not null,
     pdate date not null,
     priced float not null,
-    pricer float not null
+    pricer float not null,
+    expired boolean not null
 );

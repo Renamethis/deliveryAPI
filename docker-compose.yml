@@ -1,6 +1,21 @@
 version: "3"
 
-services:    
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./reactapp
+      dockerfile: ./react.Dockerfile
+    volumes:
+      - './reactapp:/app'
+      - '/react/node_modules'
+    ports:
+      - 3000:3000
+    depends_on:
+      - python
+    stdin_open: true
+    command: npm start
+  
   python:
     depends_on:
       - db
@@ -13,6 +28,7 @@ services:
     environment:
       - FLASK_APP=server.py
       - DEV_DATABASE_URL=postgresql://root:secret@localhost:5432/delivery
+  
   beat:
     build: .
     container_name: 'celery-beat'
@@ -23,6 +39,7 @@ services:
     environment:
       - FLASK_APP=server.py
       - DEV_DATABASE_URL=postgresql://root:secret@localhost:5432/delivery
+  
   worker:
     build: .
     container_name: 'celery-worker'
@@ -33,6 +50,7 @@ services:
     environment:
       - FLASK_APP=server.py
       - DEV_DATABASE_URL=postgresql://root:secret@localhost:5432/delivery
+
   db:
     container_name: db
     build:
@@ -45,6 +63,7 @@ services:
     ports:
       - "5432:5432"
       - "5000:5000"
+
   redis:
     image: redis
     restart: always

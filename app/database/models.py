@@ -9,6 +9,7 @@ class Entry(db.Model):
     pdate = db.Column(db.Date, nullable=False, unique=False)
     priced = db.Column(db.Float, nullable=False, unique=False)
     pricer = db.Column(db.Float, nullable=False, unique=False)
+    expired = db.Column(db.Boolean, nullable=False, unique=False)
     def to_json(self):
         return {
             'id': self.id,
@@ -16,4 +17,5 @@ class Entry(db.Model):
             'priced': self.priced,
             'date': self.pdate,
             'pricer': self.pricer,
+            'expired': self.expired
         }
