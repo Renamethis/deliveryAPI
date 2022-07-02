@@ -11,7 +11,7 @@ const columns = [
   },
   {
     Header: "Code",
-    accessor: "code",
+    accessor: "num",
   },
   {
     Header: "Price, $",
@@ -49,7 +49,7 @@ function App() {
 
     fetchData();
   }, []);
-  
+
   const {
     getTableProps,
     getTableBodyProps,
