@@ -1,8 +1,9 @@
 import flask
 from celery import Celery
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
-# Celery processing class
+# Celery extended for Flask class
 class FlaskCelery(Celery):
 
     def __init__(self, *args, **kwargs):
@@ -41,3 +42,4 @@ celery = FlaskCelery(
     backend="redis://redis:6379/0",
     include=["app.routes"]
 )
+cors = CORS()

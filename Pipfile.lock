@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b03a4e3d13530c785f8e0d43b10368b59b3add82e98d9ae1d12608d081861f13"
+            "sha256": "c71aa5b083e5fe3ced24d3211abf5ae1d62bc79f54016b80b5262e272960220e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -221,6 +221,14 @@
             ],
             "index": "pypi",
             "version": "==2.1.2"
+        },
+        "flask-cors": {
+            "hashes": [
+                "sha256:74efc975af1194fc7891ff5cd85b0f7478be4f7f59fe158102e91abb72bb4438",
+                "sha256:b60839393f3b84a0f3746f6cdca56c1ad7426aa738b70d6c61375857823181de"
+            ],
+            "index": "pypi",
+            "version": "==3.0.10"
         },
         "flask-sqlalchemy": {
             "hashes": [
@@ -531,7 +539,7 @@
                 "sha256:fc431493df245f3c627c0c05c2bd134535e7929dbe2e602b80e42bf52ff760bc",
                 "sha256:fe8b9683eb26d2c4d5db32cd29b38fdcf8381324ab48313b5b69088e0e355379"
             ],
-            "markers": "python_version >= '3.8'",
+            "markers": "python_version >= '3.10'",
             "version": "==1.23.0"
         },
         "oauth2client": {

@@ -72,9 +72,11 @@ def update():
                     is_expired = from_db.loc[index][4]
                 else:
                     is_expired = False
-                if(datetime.strptime(row[keys[3]], "%d.%m.%Y").date() < today and not is_expired):
+                if(datetime.strptime(row[keys[3]], "%d.%m.%Y").date() < today \
+                    and not is_expired):
                     bot = TelegramBot()
-                    bot.send_text("У поставки №" + str(row[keys[1]]) + " вышел срок исполнения.")
+                    bot.send_text("У поставки №" + str(row[keys[1]]) + \
+                        " вышел срок исполнения.")
                     is_expired = True
                 if(not index in from_db.index):
                     # New database entry
@@ -82,10 +84,10 @@ def update():
                         id=index,
                         num=row[keys[1]],
                         priced=float(row[keys[2]]),
-                        pdate=datetime.strptime(row[keys[3]], 
-                                                "%d.%m.%Y").strftime("%Y-%m-%d"),
                         pricer=float(row[keys[2]])*rate,
-                        expired=is_expired    
+                        expired=is_expired,
+                        pdate=datetime.strptime(row[keys[3]],
+                                                "%d.%m.%Y").strftime("%Y-%m-%d")
                     )
                     db.session.add(new_entry)
             db.session.commit()
@@ -107,9 +109,11 @@ def get(id):
             entry = entry.to_json()
             entry['date'] = entry['date'].strftime("%Y-%m-%d")
             return entry
-        
+
+# Celery task to get dates and prices for chart building
 @celery.task()
 def chart():
-    dates = [entry.pdate.strftime("%d/%m/%Y") for entry in Entry.query.order_by(Entry.pdate).all()]
+    dates = [entry.pdate.strftime("%d/%m/%Y") for entry in \
+        Entry.query.order_by(Entry.pdate).all()]
     prices = [entry.priced for entry in Entry.query.order_by(Entry.pdate).all()]
     return dates, prices

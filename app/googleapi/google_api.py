@@ -2,6 +2,9 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
 import pandas as pd 
+
+# Class for read information from Google Sheets
+
 class GoogleAPI:
     __scopes = [
         'https://www.googleapis.com/auth/spreadsheets',
@@ -13,6 +16,7 @@ class GoogleAPI:
                                    self.__scopes)
         self.__file = gspread.authorize(credentials) 
 
+    # Read information
     def update(self):
         sheet = self.__file.open("data")
         all_cells = sheet.values_get(range='A1:inf')['values']

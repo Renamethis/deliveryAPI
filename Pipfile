@@ -16,6 +16,7 @@ psycopg2-binary = "*"
 jsonify = "*"
 xmltodict = "*"
 matplotlib = "*"
+flask-cors = "*"
 
 [dev-packages]
 
