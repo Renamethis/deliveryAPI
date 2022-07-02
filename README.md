@@ -4,6 +4,7 @@ This application contains frontend and backend for delivery database management 
 The information in the database is updated every 30 seconds using celery periodic tasks.
 
 The notification about the delivery time exceeded comes when the server is initialized and then every time the database is updated (In case there are new records with a delivery time that has expired).
+Google Sheets document: https://docs.google.com/spreadsheets/d/16CiACm_JccpThKOz7TQxK95x129l6g0XosSr7DG6pfM/edit?usp=sharing
 # Tech
 - Flask web-framework
 - SQLAlchemy library 
