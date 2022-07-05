@@ -3,7 +3,7 @@ from celery import Celery
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
-# Celery extended for Flask class
+# Celery class extension for Flask
 class FlaskCelery(Celery):
 
     def __init__(self, *args, **kwargs):
